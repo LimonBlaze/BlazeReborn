@@ -1,0 +1,134 @@
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        maven { url = 'https://maven.parchmentmc.org' }
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath 'org.parchmentmc:librarian:1.+'
+        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
+    }
+}
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'org.parchmentmc.librarian.forgegradle'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+apply plugin: 'org.spongepowered.mixin'
+
+version = modVersion
+group = mavenGroup
+archivesBaseName = modName
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+minecraft {
+
+    mappings channel: 'parchment', version: "${parchmentVersion}-${mcVersion}"
+    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+
+    runs {
+        client {
+            workingDirectory project.file('run')
+
+            arg "-mixin.config=${modId}.mixins.json"
+
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                "${modId}" {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+
+            arg "-mixin.config=${modId}.mixins.json"
+
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                "${modId}" {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            property 'forge.logging.console.level', 'debug'
+
+            args '--mod', modId, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+
+            mods {
+                "${modId}" {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${mcVersion}-${forgeVersion}"
+
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+}
+
+sourceSets.main.resources {
+    srcDirs += 'src/generated/resources'
+}
+
+mixin {
+    add sourceSets.main, "${modId}.refmap.json"
+}
+
+processResources {
+    inputs.property "version", modVersion
+    inputs.property "modId", modId
+
+    filesMatching("META-INF/mods.toml") {
+        expand "version": modVersion, "modId": modId
+    }
+}
+
+jar {
+    manifest {
+        attributes([
+            "Specification-Title": modName,
+            "Specification-Vendor": modAuthor,
+            "Specification-Version": "1", // We are version 1 of ourselves
+            "Implementation-Title": modName,
+            "Implementation-Version": modVersion,
+            "Implementation-Vendor" : modAuthor,
+            "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+            "MixinConfig": "${modId}.mixins.json"
+        ])
+    }
+}
+
+jar.finalizedBy('reobfJar')
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            url "file:///${project.projectDir}/mcmodsrepo"
+        }
+    }
+}

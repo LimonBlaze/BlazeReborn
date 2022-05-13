@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[40,)"
+license="GPL-3.0"
+issueTrackerURL="https://github.com/LimonBlaze/BlazeReborn/issues"
+[[mods]]
+modId="${modId}"
+version="${version}"
+displayName="Blaze Reborn"
+displayURL="https://github.com/LimonBlaze/BlazeReborn"
+logoFile="pack.png"
+authors="LimonBlaze"
+description="A lightweight blaze expansion for Minecraft."
+
+[[dependencies.${modId}]]
+    modId="forge"
+    mandatory=true
+    versionRange="[40,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.${modId}]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.18.2,1.19)"
+    ordering="NONE"
+    side="BOTH"

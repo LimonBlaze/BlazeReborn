@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "blaze_reborn:item/soul_brewing_stand"
+  }
+}
