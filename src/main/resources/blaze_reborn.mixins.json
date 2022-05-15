@@ -7,13 +7,14 @@
     "AbstractArrowMixin",
     "BaseFireBlockMixin",
     "BlazeMixin",
-    "BlazeMixin.BlazeAttackGoalMixin",
     "BlazeSpawnerRoomMixin",
     "CampfireBlockMixin",
     "EntityMixin",
     "SmallFireballMixin",
     "ZombieMixin",
-    "access.AbstractFireballEntityAccessor"
+    "access.AbstractFireballEntityAccessor",
+    "access.BrewingRecipeRegistryAccessor",
+    "BlazeAttackGoalMixin"
   ],
   "client": [
     "client.EntityMixin",

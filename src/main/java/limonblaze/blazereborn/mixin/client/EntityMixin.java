@@ -15,8 +15,8 @@ import javax.annotation.Nonnull;
 public class EntityMixin implements FireVariantRenderedEntity {
 
     @Override
-    public @Nonnull
-    FireVariant getRenderedFireVariant() {
+    @Nonnull
+    public FireVariant getRenderedFireVariant() {
         return ((FireVariantHoldingEntity)this).getFireVariant();
     }
 

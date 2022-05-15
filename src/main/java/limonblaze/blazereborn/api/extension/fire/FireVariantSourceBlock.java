@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
 import java.util.HashMap;
 
 /**
- * Implemented in {@link BaseFireBlock} and {@link CampfireBlock} to handle the logic of setting entities' {@link FireVariant}.
+ * Implemented in {@link BaseFireBlock} and {@link CampfireBlock} to handle the logic of setting entity's {@link FireVariant}.
  * Subclasses of the above 2 classes may implement this and override the logic.
  **/
 public interface FireVariantSourceBlock {

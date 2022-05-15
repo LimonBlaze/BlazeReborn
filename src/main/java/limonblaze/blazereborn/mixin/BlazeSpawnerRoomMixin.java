@@ -30,13 +30,13 @@ public abstract class BlazeSpawnerRoomMixin extends StructurePiece {
     }
 
     @Inject(method = "postProcess", at = @At("HEAD"))
-    private void blazereborn$checkShouldSpawnSoulBlaze(WorldGenLevel pLevel, StructureFeatureManager pStructureFeatureManager, ChunkGenerator pChunkGenerator, Random pRandom, BoundingBox pBox, ChunkPos pChunkPos, BlockPos pPos, CallbackInfo ci) {
+    private void blazereborn$cacheStructureLevelAndPos(WorldGenLevel pLevel, StructureFeatureManager pStructureFeatureManager, ChunkGenerator pChunkGenerator, Random pRandom, BoundingBox pBox, ChunkPos pChunkPos, BlockPos pPos, CallbackInfo ci) {
         blazereborn$cachedLevel = pLevel;
         blazereborn$cachedSpawnerPos = this.getWorldPos(3, 5, 5);
     }
 
     @ModifyArg(method = "postProcess", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/BaseSpawner;setEntityId(Lnet/minecraft/world/entity/EntityType;)V"), index = 0)
-    private EntityType<?> blazereborn$setSpawnerForSoulBlaze(EntityType<?> entityType) {
+    private EntityType<?> blazereborn$setSpawnerEntityType(EntityType<?> entityType) {
         if(blazereborn$cachedLevel != null && blazereborn$cachedSpawnerPos != null) {
             BlazeSpawnerModificationEvent event = new BlazeSpawnerModificationEvent(blazereborn$cachedLevel, blazereborn$cachedSpawnerPos, entityType);
             MinecraftForge.EVENT_BUS.post(event);

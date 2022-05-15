@@ -22,7 +22,10 @@ public class FireVariant extends ForgeRegistryEntry<FireVariant> implements Comp
     public static final RegistryObject<FireVariant> SOUL_FIRE = BUILTIN_FIRE_VARIANTS.register("soul_fire", () -> new Simple(2, 2));
 
     private final float priority;
+
+    @OnlyIn(Dist.CLIENT)
     protected TextureAtlasSprite fireSprite0;
+    @OnlyIn(Dist.CLIENT)
     protected TextureAtlasSprite fireSprite1;
 
     private FireVariant(int priority) {

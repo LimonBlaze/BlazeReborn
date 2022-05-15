@@ -1,12 +1,16 @@
 package limonblaze.blazereborn.common.block.entity;
 
+import limonblaze.blazereborn.common.crafting.recipe.ContainerMixRecipe;
 import limonblaze.blazereborn.common.menu.SoulBrewingStandMenu;
 import limonblaze.blazereborn.common.registry.BlazeRebornBlockEntityTypes;
 import limonblaze.blazereborn.common.registry.BlazeRebornItems;
 import limonblaze.blazereborn.util.BlazeRebornConfig;
+import limonblaze.blazereborn.util.Utils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
@@ -15,6 +19,8 @@ import net.minecraft.world.level.block.BrewingStandBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.BrewingStandBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Arrays;
 
@@ -31,7 +37,7 @@ public class SoulBrewingStandBlockEntity extends BrewingStandBlockEntity {
 
     @Override
     public Component getDefaultName() {
-        return new TranslatableComponent("container.blaze_reborn.soul_brewing_stand");
+        return new TranslatableComponent(Utils.createTranslation("container", "soul_brewing_stand"));
     }
 
     protected AbstractContainerMenu createMenu(int pId, Inventory pPlayer) {

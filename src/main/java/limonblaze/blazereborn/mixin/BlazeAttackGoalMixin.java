@@ -9,15 +9,16 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-import javax.annotation.Nonnull;
+@Mixin(Blaze.BlazeAttackGoal.class)
+public class BlazeAttackGoalMixin {
 
-@Mixin(Blaze.class)
-public class BlazeMixin implements SmallFireballHoldingBlaze {
+    @Shadow
+    @Final
+    private Blaze blaze;
 
-    @Override
-    @Nonnull
-    public SmallFireball createSmallFireball(@Nonnull SmallFireball defaultFireball) {
-        return defaultFireball;
+    @ModifyVariable(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z"))
+    private SmallFireball blazereborn$getFireballFromBlaze(SmallFireball smallFireball) {
+        return ((SmallFireballHoldingBlaze) this.blaze).createSmallFireball(smallFireball);
     }
 
 }

@@ -1,5 +1,6 @@
 package limonblaze.blazereborn;
 
+import limonblaze.blazereborn.client.ClientEventHandler;
 import limonblaze.blazereborn.client.renderer.entity.SoulBlazeRenderer;
 import limonblaze.blazereborn.client.screen.SoulBrewingStandScreen;
 import limonblaze.blazereborn.common.registry.BlazeRebornBlocks;
@@ -24,6 +25,7 @@ public class BlazeRebornClient {
     public static void init() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         modBus.register(BlazeRebornClient.class);
+        MinecraftForge.EVENT_BUS.register(ClientEventHandler.class);
     }
 
     @SubscribeEvent

@@ -71,7 +71,7 @@ public abstract class EntityMixin implements FireVariantHoldingEntity {
     }
 
     @Redirect(method = "baseTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
-    private static boolean blazereborn$modifyOnFireDamage(Entity entity, DamageSource source, float amount) {
+    private boolean blazereborn$modifyOnFireDamage(Entity entity, DamageSource source, float amount) {
         EntityFireVariantEvent.Attack event = new EntityFireVariantEvent.Attack(entity, source, amount);
         if(!MinecraftForge.EVENT_BUS.post(event)) {
             float newAmount = event.getAmount();

@@ -1,6 +1,6 @@
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-package limonblaze.blazereborn.common.entity.projectile;
+package limonblaze.blazereborn.common.crafting.recipe;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

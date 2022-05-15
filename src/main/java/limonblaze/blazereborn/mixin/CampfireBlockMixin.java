@@ -1,9 +1,7 @@
 package limonblaze.blazereborn.mixin;
 
-import limonblaze.blazereborn.api.extension.fire.FireVariant;
-import limonblaze.blazereborn.api.extension.fire.FireVariantSourceBlock;
 import limonblaze.blazereborn.api.extension.fire.FireVariantHoldingEntity;
-import net.minecraft.MethodsReturnNonnullByDefault;
+import limonblaze.blazereborn.api.extension.fire.FireVariantSourceBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.Level;
@@ -15,12 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-
 @Mixin(CampfireBlock.class)
-@ParametersAreNonnullByDefault
-@MethodsReturnNonnullByDefault
 public abstract class CampfireBlockMixin extends BaseEntityBlock implements FireVariantSourceBlock {
 
     protected CampfireBlockMixin(Properties properties) {
