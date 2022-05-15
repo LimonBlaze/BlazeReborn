@@ -1,6 +1,6 @@
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-package limonblaze.blazereborn.api.extension;
+package limonblaze.blazereborn.api.extension.fire;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

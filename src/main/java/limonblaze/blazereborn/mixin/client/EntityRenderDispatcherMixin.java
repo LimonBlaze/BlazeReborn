@@ -1,8 +1,8 @@
 package limonblaze.blazereborn.mixin.client;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import limonblaze.blazereborn.api.extension.FireVariantRenderedEntity;
-import limonblaze.blazereborn.util.ClientUtils;
+import limonblaze.blazereborn.api.extension.fire.FireVariant;
+import limonblaze.blazereborn.api.extension.fire.FireVariantRenderedEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -20,20 +20,22 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class EntityRenderDispatcherMixin {
 
     @Inject(method = "renderFlame", at = @At("HEAD"), cancellable = true)
-    private void mulbl$cancelRenderFlameIfAir(PoseStack pMatrixStack, MultiBufferSource pBuffer, Entity pEntity, CallbackInfo ci) {
-        if(((FireVariantRenderedEntity)pEntity).getRenderedFireVariant().isAir()) {
+    private void blazereborn$cancelRenderFlameIfAir(PoseStack pMatrixStack, MultiBufferSource pBuffer, Entity pEntity, CallbackInfo ci) {
+        FireVariant variant = ((FireVariantRenderedEntity)pEntity).getRenderedFireVariant();
+        if(variant.hasCustomRender()) {
+            variant.renderOnEntity();
             ci.cancel();
         }
     }
 
     @ModifyVariable(method = "renderFlame", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;pushPose()V"), ordinal = 0)
-    private TextureAtlasSprite mulbl$renderFlame0(TextureAtlasSprite sprite, PoseStack pMatrixStack, MultiBufferSource pBuffer, Entity pEntity) {
-        return ClientUtils.getSpriteForFireVariant(((FireVariantRenderedEntity)pEntity).getRenderedFireVariant(), false);
+    private TextureAtlasSprite blazereborn$renderFlame0(TextureAtlasSprite sprite, PoseStack pMatrixStack, MultiBufferSource pBuffer, Entity pEntity) {
+        return ((FireVariantRenderedEntity)pEntity).getRenderedFireVariant().getSpriteForEntityRender(pEntity, false);
     }
 
     @ModifyVariable(method = "renderFlame", at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/PoseStack;pushPose()V"), ordinal = 1)
-    private TextureAtlasSprite mulbl$renderFlame1(TextureAtlasSprite sprite, PoseStack pMatrixStack, MultiBufferSource pBuffer, Entity pEntity) {
-        return ClientUtils.getSpriteForFireVariant(((FireVariantRenderedEntity)pEntity).getRenderedFireVariant(), false);
+    private TextureAtlasSprite blazereborn$renderFlame1(TextureAtlasSprite sprite, PoseStack pMatrixStack, MultiBufferSource pBuffer, Entity pEntity) {
+        return ((FireVariantRenderedEntity)pEntity).getRenderedFireVariant().getSpriteForEntityRender(pEntity, true);
     }
 
 }

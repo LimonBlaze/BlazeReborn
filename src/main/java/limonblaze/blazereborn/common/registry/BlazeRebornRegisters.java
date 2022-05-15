@@ -1,7 +1,7 @@
 package limonblaze.blazereborn.common.registry;
 
-import limonblaze.blazereborn.BlazeReborn;
-import limonblaze.blazereborn.api.extension.FireVariant;
+import limonblaze.blazereborn.api.BlazeRebornAPI;
+import limonblaze.blazereborn.api.extension.fire.FireVariant;
 import limonblaze.blazereborn.api.registry.BlazeRebornRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -10,7 +10,7 @@ import net.minecraftforge.registries.RegistryBuilder;
 
 public class BlazeRebornRegisters {
 
-    public static final DeferredRegister<FireVariant> FIRE_VARIANTS = DeferredRegister.create(BlazeRebornRegistries.FIRE_VARIANT_KEY, BlazeReborn.MODID);
+    public static final DeferredRegister<FireVariant> FIRE_VARIANTS = DeferredRegister.create(BlazeRebornRegistries.FIRE_VARIANT_KEY, BlazeRebornAPI.MODID);
 
     public static void register(IEventBus modBus) {
         BlazeRebornRegistries.FIRE_VARIANT = FIRE_VARIANTS.makeRegistry(FireVariant.class, () ->

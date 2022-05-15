@@ -1,6 +1,6 @@
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-package limonblaze.blazereborn.common.entity.ai;
+package limonblaze.blazereborn.api.extension.blaze;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

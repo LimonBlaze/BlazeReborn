@@ -1,8 +1,8 @@
 package limonblaze.blazereborn.mixin;
 
-import limonblaze.blazereborn.api.extension.FireVariant;
-import limonblaze.blazereborn.api.extension.FireVariantSourceBlock;
-import limonblaze.blazereborn.api.extension.FireVariantHoldingEntity;
+import limonblaze.blazereborn.api.extension.fire.FireVariant;
+import limonblaze.blazereborn.api.extension.fire.FireVariantSourceBlock;
+import limonblaze.blazereborn.api.extension.fire.FireVariantHoldingEntity;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.Entity;
@@ -28,15 +28,10 @@ public abstract class CampfireBlockMixin extends BaseEntityBlock implements Fire
     }
 
     @Inject(method = "entityInside", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
-    private void mulbl$setFireVariant(BlockState pState, Level pLevel, BlockPos pPos, Entity pEntity, CallbackInfo ci) {
+    private void blazereborn$setFireVariant(BlockState pState, Level pLevel, BlockPos pPos, Entity pEntity, CallbackInfo ci) {
         if(pEntity.isOnFire()) {
             ((FireVariantHoldingEntity)pEntity).setFireVariant(this.getFireVariant(pEntity, pState, pLevel, pPos), false);
         }
-    }
-
-    @Override
-    public FireVariant getFireVariant(@Nullable Entity entity, BlockState state, Level level, BlockPos pos) {
-        return FireVariantSourceBlock.DEFAULT_BLOCK_FIRE_VARIANTS.getOrDefault(this, FireVariant.FIRE.get());
     }
 
 }

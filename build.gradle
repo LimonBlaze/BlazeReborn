@@ -79,11 +79,26 @@ minecraft {
     }
 }
 
+repositories {
+    maven {
+        // location of the maven that hosts JEI files
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.k-4u.nl"
+    }
+}
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mcVersion}-${forgeVersion}"
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    compileOnly fg.deobf("mezz.jei:jei-${mcVersion}:${jeiVersion}:api")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mcVersion}:${jeiVersion}")
 }
 
 sourceSets.main.resources {
@@ -118,14 +133,35 @@ jar {
     }
 }
 
+task sourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from sourceSets.main.allJava
+}
+
+task apiJar(type: Jar) {
+    archiveClassifier.set('api')
+    include 'limonblaze/blazereborn/api/**/*'
+    from sourceSets.main.allSource
+    from sourceSets.main.output
+}
+
+
+artifacts {
+    archives apiJar
+    archives sourcesJar
+}
+
 jar.finalizedBy('reobfJar')
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
             artifact jar
+            artifact sourcesJar
+            artifact apiJar
         }
     }
+
     repositories {
         maven {
             url "file:///${project.projectDir}/mcmodsrepo"

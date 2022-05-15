@@ -1,7 +1,7 @@
 package limonblaze.blazereborn.common.registry;
 
-import limonblaze.blazereborn.BlazeReborn;
-import limonblaze.blazereborn.api.extension.FireVariant;
+import limonblaze.blazereborn.api.BlazeRebornAPI;
+import limonblaze.blazereborn.api.extension.fire.FireVariant;
 import limonblaze.blazereborn.common.item.VariantedFireChargeItem;
 import net.minecraft.world.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -11,7 +11,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class BlazeRebornItems {
 
-    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, BlazeReborn.MODID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, BlazeRebornAPI.MODID);
 
     public static final RegistryObject<SpawnEggItem> SOUL_BLAZE_SPAWN_EGG = ITEMS.register("soul_blaze_spawn_egg", () ->
         new ForgeSpawnEggItem(BlazeRebornEntityTypes.SOUL_BLAZE, 0xCCCCFF, 0xFFFFFF, new Item.Properties().tab(CreativeModeTab.TAB_MISC)));

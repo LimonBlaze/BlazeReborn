@@ -1,6 +1,6 @@
 package limonblaze.blazereborn.mixin;
 
-import limonblaze.blazereborn.api.extension.FireVariantHoldingEntity;
+import limonblaze.blazereborn.api.extension.fire.FireVariantHoldingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Monster;
@@ -19,7 +19,7 @@ public class ZombieMixin extends Monster {
     }
 
     @Inject(method = "doHurtTarget", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;setSecondsOnFire(I)V"))
-    private void mulbl$setFireType(Entity entity, CallbackInfoReturnable<Boolean> cir) {
+    private void blazereborn$setFireType(Entity entity, CallbackInfoReturnable<Boolean> cir) {
         ((FireVariantHoldingEntity)entity).setFireVariant(((FireVariantHoldingEntity)this).getFireVariant(), false);
     }
     

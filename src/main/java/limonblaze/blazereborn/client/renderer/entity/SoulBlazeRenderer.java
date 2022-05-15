@@ -1,6 +1,6 @@
 package limonblaze.blazereborn.client.renderer.entity;
 
-import limonblaze.blazereborn.BlazeReborn;
+import limonblaze.blazereborn.api.BlazeRebornAPI;
 import limonblaze.blazereborn.common.entity.monster.SoulBlaze;
 import net.minecraft.client.model.BlazeModel;
 import net.minecraft.client.model.geom.ModelLayers;
@@ -11,7 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class SoulBlazeRenderer extends MobRenderer<SoulBlaze, BlazeModel<SoulBlaze>> {
 
-    private static final ResourceLocation SOUL_BLAZE_LOCATION = BlazeReborn.id("textures/entity/soul_blaze.png");
+    private static final ResourceLocation SOUL_BLAZE_LOCATION = BlazeRebornAPI.id("textures/entity/soul_blaze.png");
 
     public SoulBlazeRenderer(EntityRendererProvider.Context context) {
         super(context, new BlazeModel<>(context.bakeLayer(ModelLayers.BLAZE)), 0.5F);

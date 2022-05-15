@@ -2,23 +2,24 @@ package limonblaze.blazereborn.client.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import limonblaze.blazereborn.BlazeReborn;
+import limonblaze.blazereborn.api.BlazeRebornAPI;
+import limonblaze.blazereborn.common.menu.SoulBrewingStandMenu;
+import limonblaze.blazereborn.util.BlazeRebornConfig;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.inventory.BrewingStandMenu;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class SoulBrewingStandScreen extends AbstractContainerScreen<BrewingStandMenu> {
-    private static final ResourceLocation BREWING_STAND_LOCATION = BlazeReborn.id("textures/gui/container/soul_brewing_stand.png");
+public class SoulBrewingStandScreen extends AbstractContainerScreen<SoulBrewingStandMenu> {
+    private static final ResourceLocation SOUL_BREWING_STAND_LOCATION = BlazeRebornAPI.id("textures/gui/container/soul_brewing_stand.png");
     private static final int[] BUBBLELENGTHS = new int[]{29, 24, 20, 16, 11, 6, 0};
 
-    public SoulBrewingStandScreen(BrewingStandMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
+    public SoulBrewingStandScreen(SoulBrewingStandMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }
 
@@ -36,7 +37,7 @@ public class SoulBrewingStandScreen extends AbstractContainerScreen<BrewingStand
     protected void renderBg(PoseStack pPoseStack, float pPartialTick, int pX, int pY) {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-        RenderSystem.setShaderTexture(0, BREWING_STAND_LOCATION);
+        RenderSystem.setShaderTexture(0, SOUL_BREWING_STAND_LOCATION);
         int i = (this.width - this.imageWidth) / 2;
         int j = (this.height - this.imageHeight) / 2;
         this.blit(pPoseStack, i, j, 0, 0, this.imageWidth, this.imageHeight);
@@ -48,7 +49,7 @@ public class SoulBrewingStandScreen extends AbstractContainerScreen<BrewingStand
 
         int i1 = this.menu.getBrewingTicks();
         if (i1 > 0) {
-            int j1 = (int)(28.0F * (1.0F - (float)i1 / 200.0F));
+            int j1 = (int)(28.0F * (1.0F - (float)i1 / BlazeRebornConfig.SERVER.brewing.soulBrewingStandBrewTime.get()));
             if (j1 > 0) {
                 this.blit(pPoseStack, i + 97, j + 16, 176, 0, 9, j1);
             }

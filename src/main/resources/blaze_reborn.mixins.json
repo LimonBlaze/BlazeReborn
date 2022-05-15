@@ -7,9 +7,11 @@
     "AbstractArrowMixin",
     "BaseFireBlockMixin",
     "BlazeMixin",
+    "BlazeMixin.BlazeAttackGoalMixin",
     "BlazeSpawnerRoomMixin",
     "CampfireBlockMixin",
     "EntityMixin",
+    "SmallFireballMixin",
     "ZombieMixin",
     "access.AbstractFireballEntityAccessor"
   ],

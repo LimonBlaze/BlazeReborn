@@ -1,35 +1,37 @@
 package limonblaze.blazereborn.mixin;
 
-import limonblaze.blazereborn.common.data.tag.MultiBlazesBiomeTags;
-import limonblaze.blazereborn.common.registry.BlazeRebornEntityTypes;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.DifficultyInstance;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
-import net.minecraft.world.entity.SpawnGroupData;
+import limonblaze.blazereborn.api.extension.blaze.SmallFireballHoldingBlaze;
 import net.minecraft.world.entity.monster.Blaze;
-import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.entity.projectile.SmallFireball;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 @Mixin(Blaze.class)
-public abstract class BlazeMixin extends Monster {
+public class BlazeMixin implements SmallFireballHoldingBlaze {
 
-    protected BlazeMixin(EntityType<? extends Monster> type, Level level) {
-        super(type, level);
+    @Override
+    @Nonnull
+    public SmallFireball createSmallFireball(@Nonnull SmallFireball defaultFireball) {
+        return defaultFireball;
     }
 
-    @Nullable
-    @Override
-    public SpawnGroupData finalizeSpawn(@Nonnull ServerLevelAccessor pLevel, @Nonnull DifficultyInstance pDifficulty, @Nonnull MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
-        if(pReason == MobSpawnType.NATURAL && this.getType() == EntityType.BLAZE && pLevel.getBiome(this.blockPosition()).is(MultiBlazesBiomeTags.SOUL_BLAZE_SPAWNING_BIOMES)) {
-            this.convertTo(BlazeRebornEntityTypes.SOUL_BLAZE.get(), true);
+    @Mixin(Blaze.BlazeAttackGoal.class)
+    public static class BlazeAttackGoalMixin {
+
+        @Shadow
+        @Final
+        private Blaze blaze;
+
+        @ModifyVariable(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z"))
+        private SmallFireball blazereborn$getFireballFromBlaze(SmallFireball smallFireball) {
+            return ((SmallFireballHoldingBlaze)this.blaze).createSmallFireball(smallFireball);
         }
-        return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
+
     }
 
 }

@@ -1,34 +1,42 @@
 package limonblaze.blazereborn;
 
-import limonblaze.blazereborn.client.BlazeRebornClient;
+import limonblaze.blazereborn.api.BlazeRebornAPI;
 import limonblaze.blazereborn.common.CommonEventHandler;
-import limonblaze.blazereborn.common.BlazeRebornCommon;
+import limonblaze.blazereborn.common.CommonSetup;
 import limonblaze.blazereborn.common.registry.*;
-import net.minecraft.resources.ResourceLocation;
+import limonblaze.blazereborn.util.BlazeRebornConfig;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@Mod(BlazeReborn.MODID)
+@Mod(BlazeRebornAPI.MODID)
 public class BlazeReborn {
-    public static final String MODID = "blaze_reborn";
+    public static final Logger LOGGER = LoggerFactory.getLogger("Blaze Reborn");
 
     public BlazeReborn() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
-        modBus.register(new BlazeRebornCommon());
-        modBus.register(new BlazeRebornClient());
+
         BlazeRebornBlockEntityTypes.BLOCK_ENTITY_TYPES.register(modBus);
         BlazeRebornBlocks.BLOCKS.register(modBus);
         BlazeRebornEntityTypes.ENTITY_TYPE.register(modBus);
         BlazeRebornItems.ITEMS.register(modBus);
         BlazeRebornMenuTypes.MENU_TYPES.register(modBus);
         BlazeRebornRegisters.register(modBus);
-        MinecraftForge.EVENT_BUS.register(new CommonEventHandler());
-    }
 
-    public static ResourceLocation id(String path) {
-        return new ResourceLocation(MODID, path);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, BlazeRebornConfig.SERVER_SPEC);
+
+        modBus.register(CommonSetup.class);
+        MinecraftForge.EVENT_BUS.register(CommonEventHandler.class);
+        DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> BlazeRebornClient::init);
+
+        LOGGER.info("Blaze Reborn has initialized, ready to set your Minecraft on fire!");
     }
 
 }

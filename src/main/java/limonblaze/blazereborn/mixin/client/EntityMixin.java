@@ -1,8 +1,8 @@
 package limonblaze.blazereborn.mixin.client;
 
-import limonblaze.blazereborn.api.extension.FireVariant;
-import limonblaze.blazereborn.api.extension.FireVariantRenderedEntity;
-import limonblaze.blazereborn.api.extension.FireVariantHoldingEntity;
+import limonblaze.blazereborn.api.extension.fire.FireVariant;
+import limonblaze.blazereborn.api.extension.fire.FireVariantRenderedEntity;
+import limonblaze.blazereborn.api.extension.fire.FireVariantHoldingEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;

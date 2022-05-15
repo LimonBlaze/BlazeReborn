@@ -3,6 +3,7 @@ package limonblaze.blazereborn.common.block.entity;
 import limonblaze.blazereborn.common.menu.SoulBrewingStandMenu;
 import limonblaze.blazereborn.common.registry.BlazeRebornBlockEntityTypes;
 import limonblaze.blazereborn.common.registry.BlazeRebornItems;
+import limonblaze.blazereborn.util.BlazeRebornConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -60,7 +61,7 @@ public class SoulBrewingStandBlockEntity extends BrewingStandBlockEntity {
             }
         } else if (flag && blockEntity.fuel > 0) {
             --blockEntity.fuel;
-            blockEntity.brewTime = 200;
+            blockEntity.brewTime = BlazeRebornConfig.SERVER.brewing.soulBrewingStandBrewTime.get();
             blockEntity.ingredient = itemstack1.getItem();
             setChanged(level, pos, state);
         }
