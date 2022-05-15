@@ -1,11 +1,12 @@
 {
   "block.blaze_reborn.soul_brewing_stand": "Soul Brewing Stand",
   "item.blaze_reborn.soul_blaze_spawn_egg": "Soul Blaze Spawn Egg",
+  "item.blaze_reborn.soul_magma_cube_spawn_egg": "Soul Magme Cube Spawn Egg",
   "item.blaze_reborn.soul_blaze_rod": "Soul Blaze Rod",
   "item.blaze_reborn.soul_blaze_powder": "Soul Blaze Powder",
   "item.blaze_reborn.soul_fire_charge": "Soul Fire Charge",
   "item.blaze_reborn.soul_brewing_stand": "Soul Brewing Stand",
   "entity.blaze_reborn.soul_blaze": "Soul Blaze",
-  "entity.blaze_reborn.varianted_small_fireball": "Varianted Small Fireball",
+  "entity.blaze_reborn.soul_magma_cube": "Soul Magma Cube",
   "container.blaze_reborn.soul_brewing_stand": "Soul Brewing Stand"
 }

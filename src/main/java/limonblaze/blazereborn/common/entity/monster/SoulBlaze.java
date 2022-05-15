@@ -12,7 +12,7 @@ import net.minecraft.world.level.Level;
 
 public class SoulBlaze extends Blaze implements FireVariantHoldingEntity, SmallFireballHoldingBlaze {
 
-    public SoulBlaze(EntityType<? extends Blaze> type, Level level) {
+    public SoulBlaze(EntityType<? extends SoulBlaze> type, Level level) {
         super(type, level);
         this.xpReward = 20;
     }

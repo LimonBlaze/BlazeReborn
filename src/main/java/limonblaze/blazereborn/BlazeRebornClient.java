@@ -2,6 +2,7 @@ package limonblaze.blazereborn;
 
 import limonblaze.blazereborn.client.ClientEventHandler;
 import limonblaze.blazereborn.client.renderer.entity.SoulBlazeRenderer;
+import limonblaze.blazereborn.client.renderer.entity.SoulMagmaCubeRenderer;
 import limonblaze.blazereborn.client.screen.SoulBrewingStandScreen;
 import limonblaze.blazereborn.common.registry.BlazeRebornBlocks;
 import limonblaze.blazereborn.common.registry.BlazeRebornEntityTypes;
@@ -37,6 +38,7 @@ public class BlazeRebornClient {
     @SubscribeEvent
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(BlazeRebornEntityTypes.SOUL_BLAZE.get(), SoulBlazeRenderer::new);
+        event.registerEntityRenderer(BlazeRebornEntityTypes.SOUL_MAGMA_CUBE.get(), SoulMagmaCubeRenderer::new);
     }
 
 }

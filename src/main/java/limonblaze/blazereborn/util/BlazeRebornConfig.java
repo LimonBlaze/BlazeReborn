@@ -31,19 +31,6 @@ public class BlazeRebornConfig {
             builder.pop();
         }
 
-        public static class Brewing {
-
-            public final ForgeConfigSpec.IntValue soulBrewingStandBrewTime;
-
-            public Brewing(ForgeConfigSpec.Builder builder) {
-                soulBrewingStandBrewTime = builder
-                    .translation(TextUtils.createTranslation("config", "brewing", "soul_brewing_stand_brew_time"))
-                    .comment("Defines how long a soul brewing stand should spend to finish a brewing task.")
-                    .defineInRange("soul_brewing_stand_brew_time", 200, 0, Integer.MAX_VALUE);
-            }
-
-        }
-
         public static class EntityGeneration {
 
             public final ForgeConfigSpec.BooleanValue convertNaturallySpawnedBlazes;
@@ -65,6 +52,18 @@ public class BlazeRebornConfig {
                     .define("generate_soul_magma_cubes", true);
             }
 
+        }
+
+        public static class Brewing {
+
+            public final ForgeConfigSpec.IntValue soulBrewingStandBrewTime;
+
+            public Brewing(ForgeConfigSpec.Builder builder) {
+                soulBrewingStandBrewTime = builder
+                    .translation(TextUtils.createTranslation("config", "brewing", "soul_brewing_stand_brew_time"))
+                    .comment("Defines how long a soul brewing stand should spend to finish a brewing task.")
+                    .defineInRange("soul_brewing_stand_brew_time", 200, 0, Integer.MAX_VALUE);
+            }
         }
 
     }
