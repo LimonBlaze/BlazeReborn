@@ -21,9 +21,8 @@ public class CommonEventHandler {
     }
 
     @SubscribeEvent
-    public static void onEntityOnFireDamage(EntityFireVariantEvent.Attack event) {
-        Entity entity = event.getEntity();
-        event.setAmount(((FireVariantHoldingEntity) entity).getFireVariant().onFireDamage(entity, event.getSource(), event.getAmount()));
+    public static void onEntityFireVariantAttack(EntityFireVariantEvent.Attack event) {
+        event.setAmount(event.getFireVariant().onFireDamage(event.getEntity(), event.getSource(), event.getAmount()));
     }
 
     @SubscribeEvent

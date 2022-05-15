@@ -15,6 +15,10 @@ public class EntityFireVariantEvent extends EntityEvent {
         this.fireVariant = fireVariant;
     }
 
+    public FireVariant getFireVariant() {
+        return fireVariant;
+    }
+
     /**
      * An event fired whenever the Entity's {@link FireVariant} is updated from external source (new value differs from the original).<br>
      * Cacelling this will make the {@link FireVariant} stay unchanged.<br>
