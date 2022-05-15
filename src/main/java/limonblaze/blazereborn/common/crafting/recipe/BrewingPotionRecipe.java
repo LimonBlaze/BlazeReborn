@@ -3,7 +3,6 @@ package limonblaze.blazereborn.common.crafting.recipe;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import limonblaze.blazereborn.api.BlazeRebornAPI;
-import limonblaze.blazereborn.common.registry.BlazeRebornRecipeSerializers;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -15,18 +14,30 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionBrewing;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.brewing.IBrewingRecipe;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 import org.jetbrains.annotations.Nullable;
 
-public class PotionMixRecipe extends BrewingMixRecipe<Potion> {
-    public static final RecipeType<PotionMixRecipe> TYPE = RecipeType.register(BlazeRebornAPI.id("brewing_potion").toString());
+public class BrewingPotionRecipe implements Recipe<Container>, IBrewingRecipe {
+    public static final ResourceLocation ID = BlazeRebornAPI.id("brewing_potion");
+    public static final Serializer SERIALIZER = new Serializer(ID);
+    public static final RecipeType<BrewingPotionRecipe> TYPE = RecipeType.register(ID.toString());
 
-    public PotionMixRecipe(ResourceLocation id, PotionBrewing.Mix<Potion> mix) {
-        super(id, mix);
+    protected final ResourceLocation id;
+    protected final PotionBrewing.Mix<Potion> mix;
+
+    public BrewingPotionRecipe(ResourceLocation id, PotionBrewing.Mix<Potion> mix) {
+        this.id = id;
+        this.mix = mix;
+    }
+
+    public PotionBrewing.Mix<Potion> getMix() {
+        return this.mix;
     }
 
     @Override
@@ -75,7 +86,7 @@ public class PotionMixRecipe extends BrewingMixRecipe<Potion> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return BlazeRebornRecipeSerializers.POTION_MIX.get();
+        return SERIALIZER;
     }
 
     @Override
@@ -83,10 +94,14 @@ public class PotionMixRecipe extends BrewingMixRecipe<Potion> {
         return TYPE;
     }
 
-    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<PotionMixRecipe> {
+    public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<BrewingPotionRecipe> {
+
+        public Serializer(ResourceLocation id) {
+            this.setRegistryName(id);
+        }
 
         @Override
-        public PotionMixRecipe fromJson(ResourceLocation recipeId, JsonObject jsonObject) {
+        public BrewingPotionRecipe fromJson(ResourceLocation recipeId, JsonObject jsonObject) {
             ResourceLocation inputId = new ResourceLocation(GsonHelper.getAsString(jsonObject, "input"));
             Potion input = ForgeRegistries.POTIONS.getValue(inputId);
             if(input == null) throw new JsonSyntaxException("Unknown input potion with id: [" + inputId + "] found in recipe json [" + recipeId + "] !");
@@ -94,12 +109,12 @@ public class PotionMixRecipe extends BrewingMixRecipe<Potion> {
             Potion output = ForgeRegistries.POTIONS.getValue(outputId);
             if(output == null) throw new JsonSyntaxException("Unknown output potion with id: [" + inputId + "] found in recipe json [" + recipeId + "] !");
             Ingredient reagent = Ingredient.fromJson(jsonObject.get("reagent"));
-            return new PotionMixRecipe(recipeId, new PotionBrewing.Mix<>(input, reagent, output));
+            return new BrewingPotionRecipe(recipeId, new PotionBrewing.Mix<>(input, reagent, output));
         }
 
         @Nullable
         @Override
-        public PotionMixRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buf) {
+        public BrewingPotionRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buf) {
             ResourceLocation inputId = buf.readResourceLocation();
             Potion input = ForgeRegistries.POTIONS.getValue(inputId);
             if(input == null) throw new JsonSyntaxException("Unknown input potion with id: [" + inputId + "] received from network in recipe [" + recipeId + "] !");
@@ -107,11 +122,11 @@ public class PotionMixRecipe extends BrewingMixRecipe<Potion> {
             Potion output = ForgeRegistries.POTIONS.getValue(outputId);
             if(output == null) throw new JsonSyntaxException("Unknown output potion with id: [" + inputId + "] received from network in recipe [" + recipeId + "] !");
             Ingredient reagent = Ingredient.fromNetwork(buf);
-            return new PotionMixRecipe(recipeId, new PotionBrewing.Mix<>(input, reagent, output));
+            return new BrewingPotionRecipe(recipeId, new PotionBrewing.Mix<>(input, reagent, output));
         }
 
         @Override
-        public void toNetwork(FriendlyByteBuf buf, PotionMixRecipe recipe) {
+        public void toNetwork(FriendlyByteBuf buf, BrewingPotionRecipe recipe) {
             buf.writeResourceLocation(recipe.mix.from.name());
             buf.writeResourceLocation(recipe.mix.to.name());
             recipe.mix.ingredient.toNetwork(buf);

@@ -1,0 +1,8 @@
+{
+  "type": "blaze_reborn:brewing_potion",
+  "input": "minecraft:awkward",
+  "output": "minecraft:luck",
+  "reagent": {
+    "item": "minecraft:glow_berries"
+  }
+}

@@ -5,12 +5,11 @@ import limonblaze.blazereborn.api.event.BlazeSpawnerModificationEvent;
 import limonblaze.blazereborn.api.event.EntityFireVariantEvent;
 import limonblaze.blazereborn.api.event.EntityOnFireIntervalEvent;
 import limonblaze.blazereborn.api.extension.fire.FireVariantHoldingEntity;
-import limonblaze.blazereborn.common.crafting.recipe.BrewingMixRecipe;
+import limonblaze.blazereborn.common.crafting.recipe.BrewingPotionRecipe;
 import limonblaze.blazereborn.common.data.tag.MultiBlazesBiomeTags;
 import limonblaze.blazereborn.common.registry.BlazeRebornEntityTypes;
 import limonblaze.blazereborn.mixin.access.BrewingRecipeRegistryAccessor;
 import limonblaze.blazereborn.util.BlazeRebornConfig;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Blaze;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -19,8 +18,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.event.OnDatapackSyncEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-
-import java.util.stream.Collectors;
 
 public class CommonEventHandler {
 
@@ -58,15 +55,15 @@ public class CommonEventHandler {
     @OnlyIn(Dist.DEDICATED_SERVER)
     public static void onDatapackReload(OnDatapackSyncEvent event) {
         if(event.getPlayer() == null) {
-            BrewingRecipeRegistryAccessor.accessRecipes().removeAll(BlazeReborn.BREWING_MIX_RECIPES_CACHE);
+            BrewingRecipeRegistryAccessor.accessRecipes().removeAll(BlazeReborn.BREWING_POTION_RECIPES);
             RecipeManager manager = event.getPlayerList().getServer().getRecipeManager();
-            BlazeReborn.BREWING_MIX_RECIPES_CACHE.clear();
+            BlazeReborn.BREWING_POTION_RECIPES.clear();
             manager.getRecipes().forEach(recipe -> {
-                if(recipe instanceof BrewingMixRecipe<?> brewingMixRecipe) {
-                    BlazeReborn.BREWING_MIX_RECIPES_CACHE.add(brewingMixRecipe);
+                if(recipe instanceof BrewingPotionRecipe brewingPotionRecipe) {
+                    BlazeReborn.BREWING_POTION_RECIPES.add(brewingPotionRecipe);
                 }
             });
-            BrewingRecipeRegistryAccessor.accessRecipes().addAll(BlazeReborn.BREWING_MIX_RECIPES_CACHE);
+            BrewingRecipeRegistryAccessor.accessRecipes().addAll(BlazeReborn.BREWING_POTION_RECIPES);
         }
     }
 

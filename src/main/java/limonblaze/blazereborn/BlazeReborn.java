@@ -3,7 +3,7 @@ package limonblaze.blazereborn;
 import limonblaze.blazereborn.api.BlazeRebornAPI;
 import limonblaze.blazereborn.common.CommonEventHandler;
 import limonblaze.blazereborn.common.CommonSetup;
-import limonblaze.blazereborn.common.crafting.recipe.BrewingMixRecipe;
+import limonblaze.blazereborn.common.crafting.recipe.BrewingPotionRecipe;
 import limonblaze.blazereborn.common.registry.*;
 import limonblaze.blazereborn.util.BlazeRebornConfig;
 import net.minecraftforge.api.distmarker.Dist;
@@ -17,15 +17,13 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Mod(BlazeRebornAPI.MODID)
 public class BlazeReborn {
     public static final Logger LOGGER = LoggerFactory.getLogger("Blaze Reborn");
-    public static final Set<BrewingMixRecipe<?>> BREWING_MIX_RECIPES_CACHE = new HashSet<>();
+    public static final Set<BrewingPotionRecipe> BREWING_POTION_RECIPES = new HashSet<>();
 
     public BlazeReborn() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -35,7 +33,6 @@ public class BlazeReborn {
         BlazeRebornEntityTypes.ENTITY_TYPE.register(modBus);
         BlazeRebornItems.ITEMS.register(modBus);
         BlazeRebornMenuTypes.MENU_TYPES.register(modBus);
-        BlazeRebornRecipeSerializers.RECIPE_SERIALIZERS.register(modBus);
         BlazeRebornRegisters.register(modBus);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, BlazeRebornConfig.SERVER_SPEC);

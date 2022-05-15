@@ -1,7 +1,7 @@
 package limonblaze.blazereborn.client;
 
 import limonblaze.blazereborn.BlazeReborn;
-import limonblaze.blazereborn.common.crafting.recipe.BrewingMixRecipe;
+import limonblaze.blazereborn.common.crafting.recipe.BrewingPotionRecipe;
 import limonblaze.blazereborn.mixin.access.BrewingRecipeRegistryAccessor;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraftforge.api.distmarker.Dist;
@@ -14,15 +14,15 @@ public class ClientEventHandler {
 
     @SubscribeEvent
     public static void onUpdateRecipeManager(RecipesUpdatedEvent event) {
-        BrewingRecipeRegistryAccessor.accessRecipes().removeAll(BlazeReborn.BREWING_MIX_RECIPES_CACHE);
+        BrewingRecipeRegistryAccessor.accessRecipes().removeAll(BlazeReborn.BREWING_POTION_RECIPES);
         RecipeManager manager = event.getRecipeManager();
-        BlazeReborn.BREWING_MIX_RECIPES_CACHE.clear();
+        BlazeReborn.BREWING_POTION_RECIPES.clear();
         manager.getRecipes().forEach(recipe -> {
-            if(recipe instanceof BrewingMixRecipe<?> brewingMixRecipe) {
-                BlazeReborn.BREWING_MIX_RECIPES_CACHE.add(brewingMixRecipe);
+            if(recipe instanceof BrewingPotionRecipe brewingPotionRecipe) {
+                BlazeReborn.BREWING_POTION_RECIPES.add(brewingPotionRecipe);
             }
         });
-        BrewingRecipeRegistryAccessor.accessRecipes().addAll(BlazeReborn.BREWING_MIX_RECIPES_CACHE);
+        BrewingRecipeRegistryAccessor.accessRecipes().addAll(BlazeReborn.BREWING_POTION_RECIPES);
     }
 
 }
