@@ -3,7 +3,7 @@ package limonblaze.blazereborn.common.entity.monster;
 import limonblaze.blazereborn.api.extension.blaze.SmallFireballHoldingBlaze;
 import limonblaze.blazereborn.api.extension.fire.FireVariant;
 import limonblaze.blazereborn.api.extension.fire.FireVariantHoldingEntity;
-import limonblaze.blazereborn.common.registry.BlazeRebornItems;
+import limonblaze.blazereborn.common.registry.BrItems;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.monster.Blaze;
 import net.minecraft.world.entity.projectile.SmallFireball;
@@ -29,7 +29,7 @@ public class SoulBlaze extends Blaze implements FireVariantHoldingEntity, SmallF
 
     @Override
     public SmallFireball createSmallFireball(SmallFireball defaultFireball) {
-        defaultFireball.setItem(new ItemStack(BlazeRebornItems.SOUL_FIRE_CHARGE.get()));
+        defaultFireball.setItem(new ItemStack(BrItems.SOUL_FIRE_CHARGE.get()));
         return defaultFireball;
     }
 

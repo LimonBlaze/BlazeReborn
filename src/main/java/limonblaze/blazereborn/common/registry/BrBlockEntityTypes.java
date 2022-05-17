@@ -7,11 +7,11 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class BlazeRebornBlockEntityTypes {
+public class BrBlockEntityTypes {
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, BlazeRebornAPI.MODID);
 
     public static final RegistryObject<BlockEntityType<SoulBrewingStandBlockEntity>> SOUL_BREWING_STAND_ENTITY = BLOCK_ENTITY_TYPES.register("soul_brewing_stand", () ->
-        BlockEntityType.Builder.of(SoulBrewingStandBlockEntity::new, BlazeRebornBlocks.SOUL_BREWING_STAND.get()).build(null));
+        BlockEntityType.Builder.of(SoulBrewingStandBlockEntity::new, BrBlocks.SOUL_BREWING_STAND.get()).build(null));
 
 }

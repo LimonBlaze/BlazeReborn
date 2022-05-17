@@ -6,8 +6,8 @@ import limonblaze.blazereborn.api.event.EntityFireVariantEvent;
 import limonblaze.blazereborn.api.event.EntityOnFireIntervalEvent;
 import limonblaze.blazereborn.api.extension.fire.FireVariantHoldingEntity;
 import limonblaze.blazereborn.common.crafting.recipe.BrewingPotionRecipe;
-import limonblaze.blazereborn.common.data.tag.BlazeRebornBiomeTags;
-import limonblaze.blazereborn.common.registry.BlazeRebornEntityTypes;
+import limonblaze.blazereborn.common.tag.BlazeRebornTags;
+import limonblaze.blazereborn.common.registry.BrEntityTypes;
 import limonblaze.blazereborn.mixin.access.BrewingRecipeRegistryAccessor;
 import limonblaze.blazereborn.util.BlazeRebornConfig;
 import net.minecraft.resources.ResourceLocation;
@@ -41,17 +41,17 @@ public class CommonEventHandler {
         if(BlazeRebornConfig.SERVER.entityGeneration.convertNaturallySpawnedBlazes.get() &&
            event.getEntityLiving() instanceof Blaze blaze &&
            blaze.getType() == EntityType.BLAZE &&
-           event.getWorld().getBiome(blaze.blockPosition()).is(BlazeRebornBiomeTags.SPAWNS_SOUL_VARIANT_MOBS)
+           event.getWorld().getBiome(blaze.blockPosition()).is(BlazeRebornTags.Biomes.SPAWNS_SOUL_VARIANT_MOBS)
         ) {
-            blaze.convertTo(BlazeRebornEntityTypes.SOUL_BLAZE.get(), true);
+            blaze.convertTo(BrEntityTypes.SOUL_BLAZE.get(), true);
         }
     }
 
     @SubscribeEvent
     public static void onBlazeSpawnerGen(BlazeSpawnerModificationEvent event) {
         if(BlazeRebornConfig.SERVER.entityGeneration.convertBlazeSpawners.get() &&
-           event.getLevel().getBiome(event.getPos()).is(BlazeRebornBiomeTags.SPAWNS_SOUL_VARIANT_MOBS)) {
-           event.setType(BlazeRebornEntityTypes.SOUL_BLAZE.get());
+           event.getLevel().getBiome(event.getPos()).is(BlazeRebornTags.Biomes.SPAWNS_SOUL_VARIANT_MOBS)) {
+           event.setType(BrEntityTypes.SOUL_BLAZE.get());
            event.setCanceled(true);
         }
     }
@@ -78,11 +78,11 @@ public class CommonEventHandler {
         if(Biomes.SOUL_SAND_VALLEY.location().equals(biomeId) && BlazeRebornConfig.SERVER.entityGeneration.generateSoulMagmaCubes.get()) {
             event.getSpawns()
                 .addSpawn(MobCategory.MONSTER, new MobSpawnSettings.SpawnerData(
-                    BlazeRebornEntityTypes.SOUL_MAGMA_CUBE.get(),
+                    BrEntityTypes.SOUL_MAGMA_CUBE.get(),
                     20, 4, 4
                     )
                 )
-                .addMobCharge(BlazeRebornEntityTypes.SOUL_MAGMA_CUBE.get(), 0.7D, 0.15D);
+                .addMobCharge(BrEntityTypes.SOUL_MAGMA_CUBE.get(), 0.7D, 0.15D);
         }
     }
 

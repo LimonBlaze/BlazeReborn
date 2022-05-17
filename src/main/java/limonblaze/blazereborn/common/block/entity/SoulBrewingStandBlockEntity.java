@@ -1,10 +1,10 @@
 package limonblaze.blazereborn.common.block.entity;
 
 import limonblaze.blazereborn.common.menu.SoulBrewingStandMenu;
-import limonblaze.blazereborn.common.registry.BlazeRebornBlockEntityTypes;
-import limonblaze.blazereborn.common.registry.BlazeRebornItems;
+import limonblaze.blazereborn.common.registry.BrBlockEntityTypes;
+import limonblaze.blazereborn.common.registry.BrItems;
 import limonblaze.blazereborn.util.BlazeRebornConfig;
-import limonblaze.blazereborn.util.TextUtils;
+import limonblaze.blazereborn.util.MiscUtils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
@@ -27,12 +27,12 @@ public class SoulBrewingStandBlockEntity extends BrewingStandBlockEntity {
 
     @Override
     public BlockEntityType<?> getType() {
-        return BlazeRebornBlockEntityTypes.SOUL_BREWING_STAND_ENTITY.get();
+        return BrBlockEntityTypes.SOUL_BREWING_STAND_ENTITY.get();
     }
 
     @Override
     public Component getDefaultName() {
-        return new TranslatableComponent(TextUtils.createTranslation("container", "soul_brewing_stand"));
+        return new TranslatableComponent(MiscUtils.createTranslation("container", "soul_brewing_stand"));
     }
 
     protected AbstractContainerMenu createMenu(int pId, Inventory pPlayer) {
@@ -41,7 +41,7 @@ public class SoulBrewingStandBlockEntity extends BrewingStandBlockEntity {
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, SoulBrewingStandBlockEntity blockEntity) {
         ItemStack itemstack = blockEntity.items.get(4);
-        if (blockEntity.fuel <= 0 && itemstack.is(BlazeRebornItems.SOUL_BLAZE_POWDER.get())) {
+        if (blockEntity.fuel <= 0 && itemstack.is(BrItems.SOUL_BLAZE_POWDER.get())) {
             blockEntity.fuel = 20;
             itemstack.shrink(1);
             setChanged(level, pos, state);

@@ -1,7 +1,7 @@
 package limonblaze.blazereborn.common.block;
 
 import limonblaze.blazereborn.common.block.entity.SoulBrewingStandBlockEntity;
-import limonblaze.blazereborn.common.registry.BlazeRebornBlockEntityTypes;
+import limonblaze.blazereborn.common.registry.BrBlockEntityTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.level.Level;
@@ -35,7 +35,7 @@ public class SoulBrewingStandBlock extends BrewingStandBlock {
     @Override
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, BlazeRebornBlockEntityTypes.SOUL_BREWING_STAND_ENTITY.get(), SoulBrewingStandBlockEntity::serverTick);
+        return pLevel.isClientSide ? null : createTickerHelper(pBlockEntityType, BrBlockEntityTypes.SOUL_BREWING_STAND_ENTITY.get(), SoulBrewingStandBlockEntity::serverTick);
     }
 
 }

@@ -8,7 +8,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryBuilder;
 
-public class BlazeRebornRegisters {
+public class BrRegisters {
 
     public static final DeferredRegister<FireVariant> FIRE_VARIANTS = DeferredRegister.create(BlazeRebornRegistries.FIRE_VARIANT_KEY, BlazeRebornAPI.MODID);
 

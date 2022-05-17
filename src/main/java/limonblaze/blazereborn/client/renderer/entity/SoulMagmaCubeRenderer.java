@@ -10,7 +10,10 @@ import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class SoulMagmaCubeRenderer extends MobRenderer<SoulMagmaCube, LavaSlimeModel<SoulMagmaCube>> {
 
     public static final ResourceLocation SOUL_MAGMA_CUBE_LOCATION = BlazeRebornAPI.id("textures/entity/slime/soul_magma_cube.png");

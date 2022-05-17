@@ -1,7 +1,7 @@
 package limonblaze.blazereborn.common.menu;
 
-import limonblaze.blazereborn.common.registry.BlazeRebornItems;
-import limonblaze.blazereborn.common.registry.BlazeRebornMenuTypes;
+import limonblaze.blazereborn.common.registry.BrItems;
+import limonblaze.blazereborn.common.registry.BrMenuTypes;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
@@ -21,7 +21,7 @@ public class SoulBrewingStandMenu extends BrewingStandMenu {
 
     @Override
     public MenuType<?> getType() {
-        return BlazeRebornMenuTypes.SOUL_BREWING_STAND.get();
+        return BrMenuTypes.SOUL_BREWING_STAND.get();
     }
 
     static class FuelSlot extends Slot {
@@ -34,7 +34,7 @@ public class SoulBrewingStandMenu extends BrewingStandMenu {
         }
 
         public static boolean mayPlaceItem(ItemStack pItemStack) {
-            return pItemStack.is(BlazeRebornItems.SOUL_BLAZE_POWDER.get());
+            return pItemStack.is(BrItems.SOUL_BLAZE_POWDER.get());
         }
 
         public int getMaxStackSize() {

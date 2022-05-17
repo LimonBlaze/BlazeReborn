@@ -8,7 +8,10 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
+@OnlyIn(Dist.CLIENT)
 public class SoulBlazeRenderer extends MobRenderer<SoulBlaze, BlazeModel<SoulBlaze>> {
 
     private static final ResourceLocation SOUL_BLAZE_LOCATION = BlazeRebornAPI.id("textures/entity/soul_blaze.png");

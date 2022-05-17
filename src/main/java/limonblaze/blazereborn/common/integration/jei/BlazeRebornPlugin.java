@@ -3,7 +3,7 @@ package limonblaze.blazereborn.common.integration.jei;
 import limonblaze.blazereborn.api.BlazeRebornAPI;
 import limonblaze.blazereborn.client.screen.SoulBrewingStandScreen;
 import limonblaze.blazereborn.common.menu.SoulBrewingStandMenu;
-import limonblaze.blazereborn.common.registry.BlazeRebornItems;
+import limonblaze.blazereborn.common.registry.BrItems;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaRecipeCategoryUid;
@@ -31,7 +31,7 @@ public class BlazeRebornPlugin implements IModPlugin {
 
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-        registration.addRecipeCatalyst(new ItemStack(BlazeRebornItems.SOUL_BREWING_STAND.get()), VanillaRecipeCategoryUid.BREWING);
+        registration.addRecipeCatalyst(new ItemStack(BrItems.SOUL_BREWING_STAND.get()), VanillaRecipeCategoryUid.BREWING);
     }
 
     @Override

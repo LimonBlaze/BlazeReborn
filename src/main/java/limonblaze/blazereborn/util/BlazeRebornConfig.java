@@ -39,15 +39,15 @@ public class BlazeRebornConfig {
 
             public EntityGeneration(ForgeConfigSpec.Builder builder) {
                 convertNaturallySpawnedBlazes = builder
-                    .translation(TextUtils.createTranslation("config", "entity_generation", "convert_naturally_spawned_blazes"))
+                    .translation(MiscUtils.createTranslation("config", "entity_generation", "convert_naturally_spawned_blazes"))
                     .comment("If true, Blazes who natually spawned in #blaze_reborn:spawns_soul_variant_mobs(Default: [minecraft:soul_sand_valley]) will be converted into Soul Blazes")
                     .define("convert_naturally_spawned_blazes", true);
                 convertBlazeSpawners = builder
-                    .translation(TextUtils.createTranslation("config", "entity_generation", "convert_blaze_spawners"))
+                    .translation(MiscUtils.createTranslation("config", "entity_generation", "convert_blaze_spawners"))
                     .comment("If true, Blaze spawners in the nether fortress who natually generated in #blaze_reborn:spawns_soul_variant_mobs(Default: [minecraft:soul_sand_valley]) will be converted into Soul Blaze spawners")
                     .define("convert_blaze_spawners", true);
                 generateSoulMagmaCubes = builder
-                    .translation(TextUtils.createTranslation("config", "entity_generation", "generate_soul_magma_cubes"))
+                    .translation(MiscUtils.createTranslation("config", "entity_generation", "generate_soul_magma_cubes"))
                     .comment("If true, Soul Magma Cubes will spawn in #blaze_reborn:spawns_soul_variant_mobs(Default: [minecraft:soul_sand_valley])")
                     .define("generate_soul_magma_cubes", true);
             }
@@ -60,7 +60,7 @@ public class BlazeRebornConfig {
 
             public Brewing(ForgeConfigSpec.Builder builder) {
                 soulBrewingStandBrewTime = builder
-                    .translation(TextUtils.createTranslation("config", "brewing", "soul_brewing_stand_brew_time"))
+                    .translation(MiscUtils.createTranslation("config", "brewing", "soul_brewing_stand_brew_time"))
                     .comment("Defines how long a soul brewing stand should spend to finish a brewing task.")
                     .defineInRange("soul_brewing_stand_brew_time", 200, 0, Integer.MAX_VALUE);
             }

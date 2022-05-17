@@ -28,12 +28,13 @@ public class BlazeReborn {
     public BlazeReborn() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        BlazeRebornBlockEntityTypes.BLOCK_ENTITY_TYPES.register(modBus);
-        BlazeRebornBlocks.BLOCKS.register(modBus);
-        BlazeRebornEntityTypes.ENTITY_TYPE.register(modBus);
-        BlazeRebornItems.ITEMS.register(modBus);
-        BlazeRebornMenuTypes.MENU_TYPES.register(modBus);
-        BlazeRebornRegisters.register(modBus);
+        BrBlockEntityTypes.BLOCK_ENTITY_TYPES.register(modBus);
+        BrBlocks.BLOCKS.register(modBus);
+        BrEntityTypes.ENTITY_TYPE.register(modBus);
+        BrItems.ITEMS.register(modBus);
+        BrMenuTypes.MENU_TYPES.register(modBus);
+        BrRegisters.register(modBus);
+        BrLoots.register();
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, BlazeRebornConfig.SERVER_SPEC);
 

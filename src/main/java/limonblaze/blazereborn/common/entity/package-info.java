@@ -1,6 +1,6 @@
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
-package limonblaze.blazereborn.data.builder;
+package limonblaze.blazereborn.common.entity;
 
 import net.minecraft.MethodsReturnNonnullByDefault;
 

@@ -1,8 +1,8 @@
-package limonblaze.blazereborn.data.builder;
+package limonblaze.blazereborn.data.server.builder;
 
 import com.google.gson.JsonObject;
 import limonblaze.blazereborn.common.crafting.recipe.BrewingPotionRecipe;
-import limonblaze.blazereborn.util.TextUtils;
+import limonblaze.blazereborn.util.MiscUtils;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -88,8 +88,8 @@ public class BrewingPotionRecipeBuilder {
 
         @Override
         public void serializeRecipeData(JsonObject json) {
-            json.addProperty("input", TextUtils.registryName(input));
-            json.addProperty("output", TextUtils.registryName(output));
+            json.addProperty("input", MiscUtils.registryName(input).toString());
+            json.addProperty("output", MiscUtils.registryName(output).toString());
             json.add("reagent", reagent.toJson());
         }
 
