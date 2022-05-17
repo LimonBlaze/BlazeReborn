@@ -49,14 +49,12 @@ public class ColoredFishingHookRenderer<T extends FishingHook> extends EntityRen
             poseStack.scale(0.5F, 0.5F, 0.5F);
             poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
             poseStack.mulPose(Vector3f.YP.rotationDegrees(180.0F));
-            PoseStack.Pose bobberPoseHolder = poseStack.last();
-            Matrix4f bobberPose = bobberPoseHolder.pose();
-            Matrix3f bobberNormal = bobberPoseHolder.normal();
+            PoseStack.Pose bobberPose = poseStack.last();
             VertexConsumer bobberBuffer = buffer.getBuffer(RenderType.entityCutout(this.getTextureLocation(entity)));
-            spriteVertex(bobberBuffer, bobberPose, bobberNormal, packedLight, 0, 0, 0, 1);
-            spriteVertex(bobberBuffer, bobberPose, bobberNormal, packedLight, 1, 0, 1, 1);
-            spriteVertex(bobberBuffer, bobberPose, bobberNormal, packedLight, 1, 1, 1, 0);
-            spriteVertex(bobberBuffer, bobberPose, bobberNormal, packedLight, 0, 1, 0, 0);
+            spriteVertex(bobberBuffer, bobberPose, packedLight, 0, 0, 0, 1);
+            spriteVertex(bobberBuffer, bobberPose, packedLight, 1, 0, 1, 1);
+            spriteVertex(bobberBuffer, bobberPose, packedLight, 1, 1, 1, 0);
+            spriteVertex(bobberBuffer, bobberPose, packedLight, 0, 1, 0, 0);
             poseStack.popPose();
             //render string
             int armFlag = player.getMainArm() == HumanoidArm.RIGHT ? 1 : -1;
@@ -121,15 +119,15 @@ public class ColoredFishingHookRenderer<T extends FishingHook> extends EntityRen
         }
     }
 
-    private static void spriteVertex(VertexConsumer buffer, Matrix4f pose, Matrix3f normal, int light,
+    private static void spriteVertex(VertexConsumer buffer, PoseStack.Pose pose, int light,
                                      int x, int y, int u, int v) {
         buffer
-            .vertex(pose, x - 0.5F, y - 0.5F, 0.0F)
+            .vertex(pose.pose(), x - 0.5F, y - 0.5F, 0.0F)
             .color(255, 255, 255, 255)
             .uv(u, v)
             .overlayCoords(OverlayTexture.NO_OVERLAY)
             .uv2(light)
-            .normal(normal, 0.0F, 1.0F, 0.0F)
+            .normal(pose.normal(), 0.0F, 1.0F, 0.0F)
             .endVertex();
     }
 
