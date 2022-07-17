@@ -1,6 +1,6 @@
 package limonblaze.blazereborn.mixin;
 
-import limonblaze.blazereborn.api.extension.blaze.SmallFireballHoldingBlaze;
+import limonblaze.blazereborn.api.extension.blaze.SmallFireballCreatingBlaze;
 import net.minecraft.world.entity.monster.Blaze;
 import net.minecraft.world.entity.projectile.SmallFireball;
 import org.spongepowered.asm.mixin.Final;
@@ -18,7 +18,7 @@ public class BlazeAttackGoalMixin {
 
     @ModifyVariable(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/Level;addFreshEntity(Lnet/minecraft/world/entity/Entity;)Z"))
     private SmallFireball blazereborn$getFireballFromBlaze(SmallFireball smallFireball) {
-        return ((SmallFireballHoldingBlaze) this.blaze).createSmallFireball(smallFireball);
+        return ((SmallFireballCreatingBlaze) this.blaze).createSmallFireball(smallFireball);
     }
 
 }

@@ -1,6 +1,6 @@
 package limonblaze.blazereborn.common.entity.monster;
 
-import limonblaze.blazereborn.api.extension.blaze.SmallFireballHoldingBlaze;
+import limonblaze.blazereborn.api.extension.blaze.SmallFireballCreatingBlaze;
 import limonblaze.blazereborn.api.extension.fire.FireVariant;
 import limonblaze.blazereborn.api.extension.fire.FireVariantHoldingEntity;
 import limonblaze.blazereborn.common.registry.BrItems;
@@ -10,7 +10,7 @@ import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class SoulBlaze extends Blaze implements FireVariantHoldingEntity, SmallFireballHoldingBlaze {
+public class SoulBlaze extends Blaze implements FireVariantHoldingEntity, SmallFireballCreatingBlaze {
 
     public SoulBlaze(EntityType<? extends SoulBlaze> type, Level level) {
         super(type, level);

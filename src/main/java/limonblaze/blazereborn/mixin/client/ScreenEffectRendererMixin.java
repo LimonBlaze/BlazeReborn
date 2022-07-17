@@ -25,7 +25,7 @@ public class ScreenEffectRendererMixin {
         if(player != null) {
             FireVariant variant = ((FireVariantRenderedEntity)player).getRenderedFireVariant();
             if(variant.hasCustomRender()) {
-                variant.renderOnScreen();
+                variant.renderOnScreen(pMinecraft, pPoseStack);
                 ci.cancel();
             }
         }

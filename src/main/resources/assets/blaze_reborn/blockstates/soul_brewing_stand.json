@@ -31,6 +31,14 @@
     },
     {
       "when": {
+        "has_bottle_3": "true"
+      },
+      "apply": {
+        "model": "blaze_reborn:block/soul_brewing_stand_bottle3"
+      }
+    },
+    {
+      "when": {
         "has_bottle_0": "false"
       },
       "apply": {
@@ -51,6 +59,14 @@
       },
       "apply": {
         "model": "blaze_reborn:block/soul_brewing_stand_empty2"
+      }
+    },
+    {
+      "when": {
+        "has_bottle_3": "false"
+      },
+      "apply": {
+        "model": "blaze_reborn:block/soul_brewing_stand_empty3"
       }
     }
   ]

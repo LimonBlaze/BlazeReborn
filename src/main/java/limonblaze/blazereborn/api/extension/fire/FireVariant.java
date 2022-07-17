@@ -1,6 +1,9 @@
 package limonblaze.blazereborn.api.extension.fire;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import limonblaze.blazereborn.api.registry.BlazeRebornRegistries;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
@@ -67,12 +70,12 @@ public class FireVariant extends ForgeRegistryEntry<FireVariant> implements Comp
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void renderOnEntity() {
+    public void renderOnEntity(PoseStack poseStack, MultiBufferSource buffer, Entity entity) {
         //NO-OP
     }
 
     @OnlyIn(Dist.CLIENT)
-    public void renderOnScreen() {
+    public void renderOnScreen(Minecraft minecraft, PoseStack poseStack) {
         //NO-OP
     }
 

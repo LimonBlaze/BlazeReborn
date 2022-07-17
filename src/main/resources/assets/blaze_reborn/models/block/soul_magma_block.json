@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "blaze_reborn:block/soul_magma"
+  }
+}

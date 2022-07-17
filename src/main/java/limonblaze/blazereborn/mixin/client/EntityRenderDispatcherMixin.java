@@ -23,7 +23,7 @@ public class EntityRenderDispatcherMixin {
     private void blazereborn$cancelRenderFlameIfAir(PoseStack pMatrixStack, MultiBufferSource pBuffer, Entity pEntity, CallbackInfo ci) {
         FireVariant variant = ((FireVariantRenderedEntity)pEntity).getRenderedFireVariant();
         if(variant.hasCustomRender()) {
-            variant.renderOnEntity();
+            variant.renderOnEntity(pMatrixStack, pBuffer, pEntity);
             ci.cancel();
         }
     }

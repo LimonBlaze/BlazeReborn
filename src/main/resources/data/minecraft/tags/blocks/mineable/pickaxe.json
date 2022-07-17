@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "blaze_reborn:soul_brewing_stand"
+    "blaze_reborn:soul_brewing_stand",
+    "blaze_reborn:soul_magma_block"
   ]
 }

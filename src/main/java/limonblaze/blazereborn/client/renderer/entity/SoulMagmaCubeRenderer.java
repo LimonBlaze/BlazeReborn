@@ -16,7 +16,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class SoulMagmaCubeRenderer extends MobRenderer<SoulMagmaCube, LavaSlimeModel<SoulMagmaCube>> {
 
-    public static final ResourceLocation SOUL_MAGMA_CUBE_LOCATION = BlazeRebornAPI.id("textures/entity/slime/soul_magma_cube.png");
+    public static final ResourceLocation SOUL_MAGMA_CUBE_LOCATION = BlazeRebornAPI.id("textures/entity/soul_magma_cube.png");
 
     public SoulMagmaCubeRenderer(EntityRendererProvider.Context context) {
         super(context, new LavaSlimeModel<>(context.bakeLayer(ModelLayers.MAGMA_CUBE)), 0.25F);

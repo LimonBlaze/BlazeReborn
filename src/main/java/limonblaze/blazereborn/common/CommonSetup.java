@@ -2,22 +2,22 @@ package limonblaze.blazereborn.common;
 
 import limonblaze.blazereborn.api.extension.fire.FireVariant;
 import limonblaze.blazereborn.api.extension.fire.FireVariantSourceBlock;
-import limonblaze.blazereborn.common.advancement.critereon.AlternativeItemPredicate;
-import limonblaze.blazereborn.common.crafting.recipe.BrewingPotionRecipe;
 import limonblaze.blazereborn.common.entity.monster.SoulMagmaCube;
 import limonblaze.blazereborn.common.item.VariantedFireChargeItem;
+import limonblaze.blazereborn.common.registry.BrEffects;
 import limonblaze.blazereborn.common.registry.BrEntityTypes;
 import limonblaze.blazereborn.common.registry.BrItems;
-import net.minecraft.advancements.critereon.ItemPredicate;
+import limonblaze.blazereborn.common.registry.BrPotions;
 import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.monster.Blaze;
 import net.minecraft.world.entity.monster.MagmaCube;
 import net.minecraft.world.entity.monster.Monster;
-import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionBrewing;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.levelgen.Heightmap;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -29,7 +29,7 @@ public class CommonSetup {
         registerDefaultBlockFireVariants();
         registerDispenserBehaviors();
         registerSpawnPlacements();
-        ItemPredicate.register(AlternativeItemPredicate.ID, AlternativeItemPredicate::fromJson);
+        registerBrewingRecipes();
     }
 
     public static void registerDefaultBlockFireVariants() {
@@ -47,16 +47,19 @@ public class CommonSetup {
         SpawnPlacements.register(BrEntityTypes.SOUL_BLAZE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, Monster::checkAnyLightMonsterSpawnRules);
         SpawnPlacements.register(BrEntityTypes.SOUL_MAGMA_CUBE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, SoulMagmaCube::checkSpawnRules);
     }
+    
+    public static void registerBrewingRecipes() {
+        PotionBrewing.addMix(Potions.STRONG_STRENGTH, BrItems.SOUL_BLAZE_POWDER.get(), BrPotions.SOUL_PIERCING.get());
+        PotionBrewing.addMix(BrPotions.SOUL_PIERCING.get(), Items.REDSTONE, BrPotions.LONG_SOUL_PIERCING.get());
+        PotionBrewing.addMix(Potions.AWKWARD, BrItems.SOUL_MAGMA_CREAM.get(), BrPotions.RESISTANCE.get());
+        PotionBrewing.addMix(BrPotions.RESISTANCE.get(), Items.GLOWSTONE_DUST, BrPotions.STRONG_RESISTANCE.get());
+        PotionBrewing.addMix(BrPotions.RESISTANCE.get(), Items.REDSTONE, BrPotions.LONG_RESISTANCE.get());
+    }
 
     @SubscribeEvent
     public static void registerMobAttributes(EntityAttributeCreationEvent event) {
         event.put(BrEntityTypes.SOUL_BLAZE.get(), Blaze.createAttributes().build());
         event.put(BrEntityTypes.SOUL_MAGMA_CUBE.get(), MagmaCube.createAttributes().build());
-    }
-
-    @SubscribeEvent
-    public static void registerRecipeSerializers(RegistryEvent.Register<RecipeSerializer<?>> event) {
-        event.getRegistry().registerAll(BrewingPotionRecipe.SERIALIZER);
     }
 
 }
