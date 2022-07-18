@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "limonblaze.blazereborn.mixin",
+  "package": "dev.limonblaze.blazereborn.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "AbstractArrowMixin",

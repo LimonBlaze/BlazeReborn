@@ -80,6 +80,9 @@ minecraft {
 }
 
 repositories {
+    flatDir {
+        dir 'libs'
+    }
     maven {
         // location of the maven that hosts JEI files
         name = "Progwml6 maven"
@@ -97,6 +100,7 @@ dependencies {
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
+    implementation fg.deobf("blank:firecrafting:0.1.0")
     runtimeOnly fg.deobf("mezz.jei:jei-${mcVersion}:${jeiVersion}")
 }
 
@@ -139,7 +143,7 @@ task sourcesJar(type: Jar) {
 
 task apiJar(type: Jar) {
     archiveClassifier.set('api')
-    include 'limonblaze/blazereborn/api/**/*'
+    include 'dev.limonblaze/blazereborn/api/**/*'
     from sourceSets.main.allSource
     from sourceSets.main.output
 }
